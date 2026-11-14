@@ -70,7 +70,8 @@ Add an object to `prompts.js`:
 
 ```js
 {
-  sector: "education",          // or "healthcare", "accounting", "m365", "life"`n  category: "Assessment",       // new categories become filter chips automatically
+  sector: "education",          // or "healthcare", "accounting", "m365", "life"
+  category: "Assessment",       // new categories become filter chips automatically
   title: "Short card title",
   use: "One line on when to use it.",
   prompt: `The full prompt text.
