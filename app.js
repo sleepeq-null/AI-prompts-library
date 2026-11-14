@@ -82,6 +82,17 @@
     state.query = e.target.value.trim(); renderCards();
   });
 
+  // Respect "reduce motion": hold the hero video on its first frame.
+  const video = document.getElementById("hero-video");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const applyMotion = () => {
+    if (!video) return;
+    if (reduce.matches) { video.pause(); video.currentTime = 0; }
+    else video.play().catch(() => {});
+  };
+  reduce.addEventListener?.("change", applyMotion);
+  applyMotion();
+
   renderChips();
   renderCards();
 })();
