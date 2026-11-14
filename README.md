@@ -1,63 +1,77 @@
-# AI Prompt Library for Educators & Healthcare Professionals
+# AI Prompt Library for Educators & Healthcare Teams
 
-A simple, static website of ready-to-use AI prompts. Visitors can filter by audience (Education / Healthcare), filter by topic, search, and copy any prompt with one click.
+**Live site: [sleepeq-null.github.io/AI-prompts-library](https://sleepeq-null.github.io/AI-prompts-library/)**
 
-No build tools or frameworks: it's plain HTML, CSS and JavaScript, so GitHub Pages can host it as-is.
+A searchable library of ready-to-use AI prompts for teachers, nurses, clinicians and trainers, with an interactive builder that turns a prompt template into a finished prompt you can copy and paste into any AI assistant.
 
-## Files
+![Home page with looping Brooklyn Bridge video header, audience tabs, topic filters and prompt cards](assets/screenshot-home.jpg)
 
-| File | What it is |
+## Features
+
+- **Interactive prompt builder.** Each prompt's `[PLACEHOLDERS]` become form fields automatically. As you type, a live preview highlights what you've filled in and what's still blank, and **Copy prompt** copies the finished text.
+- **Filter and search.** Switch between Education and Healthcare, narrow by topic, or search across titles and prompt text.
+- **Privacy built in.** A visible notice and paste-field hints remind users never to include student or patient identifiers. Healthcare prompts that take notes or messages ask for de-identified text and tell the AI not to invent findings.
+- **Accessible and responsive.** Labelled form fields, keyboard-friendly controls, automatic dark mode, a layout that works at phone width, and a background video that holds still for visitors who have "reduce motion" turned on.
+- **No build step.** Plain HTML, CSS and JavaScript, so it's fast, easy to host, and easy for non-developers to edit.
+
+![Prompt builder: a "Condition / procedure" field filled with "type 2 diabetes" and the preview updating live](assets/screenshot-builder.jpg)
+
+## How it works
+
+| File | Role |
 |---|---|
-| `index.html` | The page layout, intro text, privacy notice and tips |
-| `prompts.js` | **The prompt library.** Edit this to add or change prompts |
-| `app.js` | Filtering, search and copy-to-clipboard |
-| `styles.css` | Styling (includes automatic dark mode) |
-| `.nojekyll` | Tells GitHub Pages to serve the files as-is |
+| `prompts.js` | The content: an array of prompt objects (`sector`, `category`, `title`, `use`, `prompt`). Non-developers only need to edit this file. |
+| `app.js` | Rendering, filtering, search, the prompt builder and copy-to-clipboard |
+| `styles.css` | Design tokens as CSS custom properties, with light and dark themes |
+| `index.html` | Page structure and the card `<template>` |
 
-## Publish on GitHub Pages
+**The builder** finds every `[BRACKETED]` placeholder in a prompt with a regular expression and turns each unique one into a form field:
 
-### Option A: in the browser (no command line)
+- The bracket text becomes the label. Anything after `, e.g.` becomes placeholder text: `[LENGTH, e.g. 45-minute]` gives a **Length** field with the hint *e.g. 45-minute*.
+- Placeholders starting with `PASTE` get a multi-line text area.
+- A placeholder used more than once, like `[GRADE LEVEL]`, is one field that fills every occurrence.
+- Typed values are kept per prompt, so they survive switching filters or searching.
 
-1. Sign in to GitHub and click **New repository** (top-right **+** menu).
-2. Name it, e.g. `ai-prompt-library`, set it to **Public**, and click **Create repository**.
-3. On the new repo page, click **uploading an existing file**, drag in all the files from this folder (including `.nojekyll`), and click **Commit changes**.
-4. Go to **Settings → Pages**.
-5. Under **Build and deployment**, set **Source** to *Deploy from a branch*, choose branch **main** and folder **/ (root)**, then **Save**.
-6. After a minute or two your site will be live at
-   `https://<your-username>.github.io/ai-prompt-library/`
+Adding a new prompt with new placeholders needs no code changes: the form generates itself.
 
-> Tip: if you name the repository exactly `<your-username>.github.io`, the site will be at `https://<your-username>.github.io/` instead.
+## Design decisions
 
-### Option B: with Git
+- **Static site over a framework.** The content is small and changes rarely, so plain HTML, CSS and JavaScript keeps the site fast, dependency-free and free to host on GitHub Pages.
+- **Prompts in a `.js` file, not `.json`.** A `<script>` tag loads it, so the page also works opened straight from disk, where browsers block `fetch()` of local files.
+- **Safe rendering.** Prompt text and user input are HTML-escaped before being highlighted in the preview, so pasted content can't inject markup.
+- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=3`) that changes with each release.
+- **Lightweight media.** The 12-second header video is the 720p version (3.6 MB), muted, looping and inline, under a gradient that keeps the text readable.
 
-```bash
-git init
-git add .
-git commit -m "Initial prompt library"
-git branch -M main
-git remote add origin https://github.com/<your-username>/ai-prompt-library.git
-git push -u origin main
-```
+## Prompt-writing approach
 
-Then do steps 4–6 above.
+Each prompt follows the same structure, which makes AI output more reliable:
+
+1. **Role.** "You are an experienced 7th-grade science teacher…"
+2. **Task and context.** What to make, for whom, and what the learners or patients already know.
+3. **Format.** Sections, word limits, reading level.
+4. **Guardrails.** "Only use information in the notes", "Do not rewrite the essay for them", "I will review it for clinical accuracy".
 
 ## Adding a prompt
 
-Open `prompts.js` and add an entry to the list:
+Add an object to `prompts.js`:
 
 ```js
 {
   sector: "education",          // or "healthcare"
-  category: "Assessment",       // new categories appear as filter chips automatically
+  category: "Assessment",       // new categories become filter chips automatically
   title: "Short card title",
   use: "One line on when to use it.",
   prompt: `The full prompt text.
-Use [BRACKETS] for anything the reader should fill in.`
+Use [BRACKETS] for anything the reader fills in, e.g. [TOPIC, e.g. fractions].`
 },
 ```
 
-Commit the change (or edit the file directly on GitHub with the pencil icon) and the site updates within a minute or two.
+Then change `?v=3` to the next number in `index.html` so returning visitors get the update.
 
-## Preview locally
+## Run locally
 
-Just double-click `index.html` to open it in your browser.
+Open `index.html` in a browser, or serve the folder with any static server.
+
+## Credits
+
+Header video: [Time Lapse View of Brooklyn Bridge at Night](https://www.pexels.com/video/time-lapse-view-of-brooklyn-bridge-at-night-5606315/) by Sarowar Hussain, used under the [Pexels License](https://www.pexels.com/license/).

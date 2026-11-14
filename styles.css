@@ -98,7 +98,7 @@ h1 {
 }
 .count { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; align-items: start; }
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
   padding: 20px; display: flex; flex-direction: column; gap: 8px;
@@ -118,6 +118,34 @@ pre {
   margin: 8px 0 0; max-height: 360px; overflow: auto;
 }
 pre mark { background: none; color: var(--accent); font-weight: 600; }
+pre mark.filled {
+  background: var(--accent-soft); color: var(--text); font-weight: 500;
+  border-radius: 3px; padding: 0 2px;
+}
+
+.builder { margin-top: 10px; }
+.builder-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.progress { font-size: 13px; color: var(--muted); }
+.reset {
+  font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0;
+  cursor: pointer; text-decoration: underline; padding: 0;
+}
+.reset:hover { color: var(--text); }
+.fields { display: grid; gap: 10px; }
+.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.field input, .field textarea {
+  width: 100%; font: inherit; font-size: 14px; padding: 7px 10px;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg); color: var(--text);
+}
+.field textarea { resize: vertical; min-height: 84px; }
+.field input:focus, .field textarea:focus {
+  outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent);
+}
+.preview-label {
+  margin: 14px 0 0; font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted);
+}
 .copy {
   margin-top: auto; align-self: flex-start; font: inherit; font-weight: 500; font-size: 14px;
   padding: 7px 14px; border-radius: 8px; cursor: pointer;

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <header class="hero">
@@ -18,7 +18,7 @@
     <div class="wrap">
       <p class="eyebrow">Prompt library</p>
       <h1>Practical AI prompts for educators and healthcare teams</h1>
-      <p class="lede">Copy a prompt, replace the <span class="ph">[BRACKETED]</span> parts with your details, and paste it into the AI assistant you use.</p>
+      <p class="lede">Open a prompt, fill in the <span class="ph">[BRACKETED]</span> details, and copy a finished prompt ready to paste into the AI assistant you use.</p>
     </div>
   </header>
 
@@ -60,14 +60,22 @@
       <h3></h3>
       <p class="use"></p>
       <details>
-        <summary>View prompt</summary>
-        <pre></pre>
+        <summary>Customize &amp; preview</summary>
+        <div class="builder">
+          <div class="builder-head">
+            <span class="progress"></span>
+            <button class="reset" type="button">Clear</button>
+          </div>
+          <div class="fields"></div>
+          <p class="preview-label">Preview</p>
+          <pre></pre>
+        </div>
       </details>
       <button class="copy" type="button">Copy prompt</button>
     </article>
   </template>
 
-  <script src="prompts.js?v=2"></script>
-  <script src="app.js?v=2"></script>
+  <script src="prompts.js?v=3"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
