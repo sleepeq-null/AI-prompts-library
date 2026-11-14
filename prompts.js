@@ -1,11 +1,13 @@
 // ------------------------------------------------------------------
 // PROMPT LIBRARY
 // Add, edit, or remove prompts here. Each prompt needs:
-//   sector:   "education" or "healthcare"
+//   sector:   "education", "healthcare", "accounting" or "m365"
 //   category: a short label used for the filter chips
 //   title:    the card heading
 //   use:      one line on when to use it
-//   prompt:   the text people copy. Use [BRACKETS] for parts to fill in.
+//   prompt:   the text people copy. Use [BRACKETS] for parts to fill in;
+//             each one becomes a form field. Use (PARENTHESES) for markers
+//             you want the AI itself to write, so they don't become fields.
 // ------------------------------------------------------------------
 window.PROMPTS = [
   // ---------------- EDUCATION ----------------
@@ -238,5 +240,250 @@ Keep it under 120 words, warm and clear, avoid jargon, and end with exactly what
 
 Patient message (de-identified):
 [PASTE MESSAGE]`
+  },
+
+  // ---------------- ACCOUNTING ----------------
+  {
+    sector: "accounting",
+    category: "Analysis",
+    title: "Budget vs. actual commentary",
+    use: "Turn a variance table into clear commentary for management.",
+    prompt: `You are a senior FP&A analyst. Below is a budget vs. actual summary for [PERIOD, e.g. Q3 2026] for [DEPARTMENT OR ENTITY].
+
+[PASTE VARIANCE TABLE, with amounts but no account numbers]
+
+Write management commentary that:
+1. Opens with a 2-sentence overall summary
+2. Explains the 3–5 largest variances (over [THRESHOLD, e.g. 5% or $10,000]), separating timing differences from permanent ones
+3. Flags anything that needs follow-up
+4. Uses plain business language, not accounting jargon
+
+Only use the figures given. If a reason for a variance isn't clear from the data, list it as a question for me to confirm instead of guessing.`
+  },
+  {
+    sector: "accounting",
+    category: "Close & reconciliation",
+    title: "Month-end close checklist",
+    use: "Build or tighten a close checklist for your team.",
+    prompt: `Create a month-end close checklist for a [COMPANY TYPE, e.g. 50-person services firm] using [ACCOUNTING SYSTEM, e.g. QuickBooks Online].
+
+Organize it by close day (Day 1 to Day [NUMBER OF CLOSE DAYS]) and include for each task:
+- The task
+- Suggested owner role
+- What "done" looks like (e.g. reconciliation signed off, variance under threshold)
+
+Cover cash, AR, AP, accruals, prepaid expenses, fixed assets, payroll, and the final review. Point out the tasks that most often cause delays and how to start them earlier.`
+  },
+  {
+    sector: "accounting",
+    category: "Close & reconciliation",
+    title: "Troubleshoot a reconciliation",
+    use: "Work through why two balances don't match.",
+    prompt: `I'm reconciling [ACCOUNT TYPE, e.g. the operating bank account] and the balances don't match.
+
+Book balance: [BOOK BALANCE]
+Statement / subledger balance: [OTHER BALANCE]
+Difference: [DIFFERENCE]
+
+Unmatched items so far (descriptions and amounts only, no account numbers):
+[PASTE UNMATCHED ITEMS]
+
+Walk me through the most likely causes in order of probability (timing, duplicates, transpositions, missing entries), the quick checks for each, and whether the difference has any telltale signs (e.g. divisible by 9 suggests a transposition). Then suggest which items to investigate first.`
+  },
+  {
+    sector: "accounting",
+    category: "Excel & tools",
+    title: "Write an Excel formula",
+    use: "Get the right formula and understand how it works.",
+    prompt: `I'm working in Excel. My data has these columns: [DESCRIBE COLUMNS, e.g. A = date, B = vendor, C = amount, D = GL code].
+
+I want to: [WHAT YOU WANT, e.g. total the amounts by vendor for the current month only]
+
+Give me:
+1. The formula (prefer modern functions like XLOOKUP, SUMIFS, FILTER if they fit)
+2. A plain-English explanation of each part
+3. One common mistake to avoid with this formula
+4. An alternative approach using a PivotTable, if that would be simpler`
+  },
+  {
+    sector: "accounting",
+    category: "Client communication",
+    title: "Request missing documents",
+    use: "Chase clients for paperwork politely and clearly.",
+    prompt: `Write a short, friendly email to a client asking for documents we still need for [ENGAGEMENT, e.g. their 2026 tax return].
+
+Missing items:
+[LIST OF MISSING ITEMS]
+
+Deadline: [DEADLINE]
+
+Keep it under 150 words, explain briefly why the deadline matters, list the items as a checklist, and tell them how to send files securely through [SECURE UPLOAD METHOD, e.g. our client portal]. Remind them not to email sensitive documents. Then write a firmer follow-up version for if they haven't replied in a week.`
+  },
+  {
+    sector: "accounting",
+    category: "Standards & research",
+    title: "Explain an accounting standard",
+    use: "Get up to speed on a standard before applying it.",
+    prompt: `Explain [STANDARD, e.g. ASC 842 lease accounting] to someone with a general accounting background.
+
+Cover:
+1. What problem the standard solves
+2. The key judgments and calculations involved
+3. A simple worked example with numbers
+4. Common mistakes in practice
+5. Which disclosures it typically requires
+
+Point out anything that changed recently or differs between [FRAMEWORKS, e.g. US GAAP and IFRS]. Note which points I should verify against the authoritative guidance, since your knowledge may be out of date.`
+  },
+  {
+    sector: "accounting",
+    category: "Standards & research",
+    title: "Draft a technical accounting memo",
+    use: "Document a judgment area in a clear, audit-ready way.",
+    prompt: `Help me draft a technical accounting memo on this issue:
+
+[DESCRIBE THE TRANSACTION OR ISSUE, without client names]
+
+Use this structure:
+- Background
+- Issue(s)
+- Relevant guidance (name the standards and sections I should cite; I'll confirm the exact references)
+- Analysis of the alternatives considered
+- Conclusion
+- Financial statement and disclosure impact
+
+Write in a neutral, professional tone. Mark any facts you are assuming with (ASSUMPTION) so I can confirm them.`
+  },
+  {
+    sector: "accounting",
+    category: "Client communication",
+    title: "Explain financials to a non-accountant",
+    use: "Help a business owner understand their numbers.",
+    prompt: `Explain these financial results to a small business owner with no accounting background:
+
+[PASTE SUMMARY P&L OR KEY FIGURES]
+
+In under 250 words:
+1. Say how the business did this period in one sentence
+2. Explain the 3 numbers that matter most and why
+3. Explain the difference between profit and cash if it's relevant here
+4. Suggest 2 questions they should be asking
+
+Use everyday analogies and no jargon.`
+  },
+
+  // ---------------- MICROSOFT 365 COPILOT ----------------
+  {
+    sector: "m365",
+    category: "Outlook",
+    title: "Summarize a long email thread",
+    use: "Catch up on a long thread in seconds (Copilot in Outlook).",
+    prompt: `Summarize this email thread for me.
+
+Give me:
+1. The main question or decision being discussed, in one sentence
+2. Where things stand now and who said what last
+3. Any open questions or requests directed at me
+4. Deadlines mentioned
+
+Keep it to bullet points. Then suggest a short reply that [YOUR GOAL, e.g. agrees to the Thursday deadline but asks for the final numbers first].`
+  },
+  {
+    sector: "m365",
+    category: "Outlook",
+    title: "Draft a reply in the right tone",
+    use: "Write a clear reply to a tricky email.",
+    prompt: `Draft a reply to this email. I want to [YOUR GOAL, e.g. politely decline the meeting and suggest an async update instead].
+
+Tone: [TONE, e.g. warm but firm]
+Length: under [WORD LIMIT, e.g. 120] words
+
+Acknowledge their main point first, be specific about next steps, and don't over-apologize.`
+  },
+  {
+    sector: "m365",
+    category: "Teams",
+    title: "Meeting recap with action items",
+    use: "Turn a recorded or transcribed meeting into a recap (Copilot in Teams).",
+    prompt: `Recap this meeting.
+
+Include:
+1. A 3-sentence summary
+2. Decisions made
+3. Action items as a table: task, owner, due date (write "not stated" if no date was given)
+4. Open questions that weren't resolved
+5. Anything that was raised but not discussed fully
+
+Only include what was actually said in the meeting. Then draft a short follow-up message I can post in the [CHANNEL OR CHAT NAME] chat.`
+  },
+  {
+    sector: "m365",
+    category: "Copilot Chat",
+    title: "Catch up on what I missed",
+    use: "Get back up to speed after time off.",
+    prompt: `I was out from [DATES]. Based on my email, Teams chats and meetings from that time, what do I need to know?
+
+Organize it as:
+1. Things that need my action, with any deadlines
+2. Decisions made that affect my work
+3. Updates on [PROJECT OR TOPIC]
+4. Messages I can probably skip
+
+Link to the source email, chat or meeting for each item.`
+  },
+  {
+    sector: "m365",
+    category: "Word",
+    title: "Draft a document from my files",
+    use: "Start a first draft from existing notes or files (Copilot in Word).",
+    prompt: `Draft a [DOCUMENT TYPE, e.g. one-page project proposal] using [SOURCE FILE, e.g. type / to choose your meeting notes file].
+
+Audience: [AUDIENCE, e.g. department heads]
+Goal: [GOAL, e.g. get approval for a pilot program]
+
+Structure it with clear headings, keep it under [LENGTH, e.g. 600 words], and end with the specific decision or next step I'm asking for. Leave notes like (CONFIRM: budget figure) where information is missing from the source file.`
+  },
+  {
+    sector: "m365",
+    category: "Word",
+    title: "Rewrite for a different audience",
+    use: "Adapt a document without starting from scratch.",
+    prompt: `Rewrite this document for [NEW AUDIENCE, e.g. parents / patients / the executive team].
+
+Keep the key facts and any numbers exactly the same. Change:
+- The reading level to [READING LEVEL, e.g. 8th grade]
+- The length to about [LENGTH, e.g. half the current length]
+- The tone to [TONE, e.g. reassuring and practical]
+
+Then list anything you removed, so I can check nothing important was lost.`
+  },
+  {
+    sector: "m365",
+    category: "Excel",
+    title: "Find insights in a table",
+    use: "Explore data and add calculations (Copilot in Excel).",
+    prompt: `Analyze this table and tell me the 3 most important trends or outliers, with the numbers behind each.
+
+Then:
+1. Add a column that calculates [CALCULATION, e.g. percent change from last month]
+2. Suggest the best chart to show [WHAT TO SHOW, e.g. how each region is trending] and create it
+3. Highlight rows where [CONDITION, e.g. the amount is over budget]
+
+Explain any formulas you add so I can check them.`
+  },
+  {
+    sector: "m365",
+    category: "PowerPoint",
+    title: "Create a deck from a document",
+    use: "Turn a report or proposal into slides (Copilot in PowerPoint).",
+    prompt: `Create a presentation from [SOURCE FILE, e.g. type / to choose your Word document].
+
+- About [NUMBER OF SLIDES, e.g. 8] slides for [AUDIENCE]
+- One clear message per slide, written as the slide title
+- No more than 4 short bullets per slide
+- Speaker notes with what to say for each slide
+- A final slide with the decision or next step we need
+
+Keep all figures exactly as they appear in the source.`
   }
 ];

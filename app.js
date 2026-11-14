@@ -9,7 +9,12 @@
   const chips = document.getElementById("chips");
   const count = document.getElementById("count");
   const tpl = document.getElementById("card-tpl");
-  const label = { education: "Education", healthcare: "Healthcare" };
+  const label = {
+    education: "Education",
+    healthcare: "Healthcare",
+    accounting: "Accounting",
+    m365: "Microsoft 365"
+  };
   const PLACEHOLDER = /\[[^\]]+\]/g;
 
   const escapeHtml = (s) =>
