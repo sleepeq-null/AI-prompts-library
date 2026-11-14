@@ -27,6 +27,7 @@ A searchable library of 40 ready-to-use AI prompts for **educators, healthcare t
 ## Features
 
 - **Interactive prompt builder.** Each prompt's `[PLACEHOLDERS]` become form fields automatically. As you type, a live preview highlights what you've filled in and what's still blank, and **Copy prompt** copies the finished text.
+- **Open in Claude, free.** One click opens the finished prompt at claude.ai in a new tab, using the visitor's own Claude account (the free plan works). The site needs no API key and has no running costs. The prompt is also copied, so it can be pasted if the pre-fill doesn't come through (for example, after signing in). Very long prompts, like ones with a pasted essay, are copied instead of pre-filled, to stay under URL-length limits.
 - **Filter and search.** Switch between five areas, narrow by topic, or search across titles and prompt text.
 - **Privacy built in.** A visible notice and paste-field hints remind users never to include student, patient or client identifiers. Healthcare and accounting prompts ask for de-identified data (no account numbers) and tell the AI not to invent findings or figures.
 - **Accessible and responsive.** Labelled form fields, keyboard-friendly controls, automatic dark mode, a layout that works at phone width, and a background video that holds still for visitors who have "reduce motion" turned on.
@@ -57,7 +58,8 @@ Adding a new prompt with new placeholders needs no code changes: the form genera
 - **Static site over a framework.** The content is small and changes rarely, so plain HTML, CSS and JavaScript keeps the site fast, dependency-free and free to host on GitHub Pages.
 - **Prompts in a `.js` file, not `.json`.** A `<script>` tag loads it, so the page also works opened straight from disk, where browsers block `fetch()` of local files.
 - **Safe rendering.** Prompt text and user input are HTML-escaped before being highlighted in the preview, so pasted content can't inject markup.
-- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=7`) that changes with each release.
+- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=8`) that changes with each release.
+- **"Open in Claude" instead of an embedded chatbot (for now).** Linking to claude.ai lets visitors run prompts for free on their own accounts, with no API key to protect, no per-use cost and no abuse risk for the site. The trade-off is that the prompt travels in the link (so it can show up in browser history), which is one more reason the site tells people never to include personal information. An on-page "Try it" button through a secured AI gateway is planned as v2.0.
 - **Homework prompts that teach, not cheat.** The homework prompts tell the AI to ask guiding questions, give hints, and point to where a mistake is rather than handing over answers. Students get help learning, which is also what teachers and parents want.
 - **Lightweight media.** The 12-second header video is the 720p version (3.6 MB), muted, looping and inline, under a gradient that keeps the text readable.
 
@@ -87,7 +89,7 @@ Use [BRACKETS] for anything the reader fills in, e.g. [TOPIC, e.g. fractions].`
 },
 ```
 
-Then change `?v=7` to the next number in `index.html` so returning visitors get the update.
+Then change `?v=8` to the next number in `index.html` so returning visitors get the update.
 
 ## Automated checks
 

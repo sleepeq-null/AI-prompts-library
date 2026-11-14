@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
   <header class="hero">
@@ -23,11 +23,21 @@
     <div class="wrap">
       <p class="eyebrow">Education · Healthcare · Accounting · Microsoft 365 · Everyday life</p>
       <h1>Practical AI prompts for work, school and everyday life</h1>
-      <p class="lede">Open a prompt, fill in the <span class="ph">[BRACKETED]</span> details, and copy a finished prompt ready to paste into the AI assistant you use.</p>
+      <p class="lede">Open a prompt, fill in the <span class="ph">[BRACKETED]</span> details, then copy the finished prompt or open it straight in Claude for free.</p>
     </div>
   </header>
 
   <main class="wrap">
+    <section class="tips" aria-labelledby="tips-heading">
+      <h2 id="tips-heading">Tips for better results</h2>
+      <ul>
+        <li><strong>Give it a role and context.</strong> <span>"You are a 7th-grade science teacher…" gets better output than a bare question.</span></li>
+        <li><strong>Be specific about the format.</strong> <span>Ask for bullets, a table, a word limit, or a reading level.</span></li>
+        <li><strong>Iterate.</strong> <span>Follow up with "make it shorter", "simpler", or "add an example".</span></li>
+        <li><strong>You're the expert.</strong> <span>Check facts, especially anything clinical or graded.</span></li>
+      </ul>
+    </section>
+
     <div class="controls">
       <div class="tabs" role="tablist" aria-label="Audience">
         <button class="tab active" data-sector="all" role="tab" aria-selected="true">All</button>
@@ -43,6 +53,7 @@
 
     <aside class="notice" id="privacy">
       <strong>Before you paste anything:</strong> never include personal or identifying information about students, patients or clients (names, dates of birth, record or account numbers, tax IDs, etc.) unless your organization has approved the tool for that data. Always review AI output for accuracy; it's a first draft, not a final answer.
+      <br><strong>Open in Claude</strong> copies your prompt and opens it at claude.ai in a new tab, using your own Claude account (the free plan works). If it doesn't appear there, just paste it.
     </aside>
 
     <p class="count" id="count" aria-live="polite"></p>
@@ -50,14 +61,6 @@
   </main>
 
   <footer class="wrap footer">
-    <h2>Tips for better results</h2>
-    <ul>
-      <li><strong>Give it a role and context.</strong> "You are a 7th-grade science teacher…" gets better output than a bare question.</li>
-      <li><strong>Be specific about the format.</strong> Ask for bullets, a table, a word limit, or a reading level.</li>
-      <li><strong>Iterate.</strong> Follow up with "make it shorter", "simpler", or "add an example".</li>
-      <li><strong>You're the expert.</strong> Check facts, especially anything clinical or graded.</li>
-    </ul>
-
     <section class="contribute">
       <div>
         <h2>Have a prompt that works well?</h2>
@@ -91,11 +94,14 @@
           <pre></pre>
         </div>
       </details>
-      <button class="copy" type="button">Copy prompt</button>
+      <div class="card-actions">
+        <button class="copy" type="button">Copy prompt</button>
+        <button class="open-claude" type="button" aria-label="Open this prompt in Claude (opens a new tab)">Open in Claude ↗</button>
+      </div>
     </article>
   </template>
 
-  <script src="prompts.js?v=7"></script>
-  <script src="app.js?v=7"></script>
+  <script src="prompts.js?v=8"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>

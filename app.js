@@ -17,6 +17,9 @@
     life: "Everyday life"
   };
   const PLACEHOLDER = /\[[^\]]+\]/g;
+  // Longer prompts (e.g. with pasted essays) are copied instead of pre-filled,
+  // to stay well under browser and server URL-length limits.
+  const MAX_PREFILL = 6000;
 
   const escapeHtml = (s) =>
     s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -121,6 +124,20 @@
       copy(fill(p.prompt, vals), btn, left && left < keys.length ? `Copied (${left} left blank)` : "Copied!");
     };
 
+    // Open the finished prompt in claude.ai using the visitor's own account.
+    // The prompt is copied first as a fallback (e.g. if they have to sign in, or the
+    // prompt is too long to pre-fill through the link).
+    const openBtn = node.querySelector(".open-claude");
+    openBtn.onclick = () => {
+      const text = fill(p.prompt, vals);
+      const encoded = encodeURIComponent(text);
+      const url = encoded.length <= MAX_PREFILL
+        ? `https://claude.ai/new?q=${encoded}`
+        : "https://claude.ai/new";
+      copy(text, openBtn, encoded.length <= MAX_PREFILL ? "Opened (also copied)" : "Copied: paste in Claude", "Open in Claude ↗");
+      window.open(url, "_blank", "noopener,noreferrer");
+    };
+
     update();
     return node;
   }
@@ -158,7 +175,7 @@
     list.forEach((p) => grid.appendChild(buildCard(p, prompts.indexOf(p))));
   }
 
-  async function copy(text, btn, doneLabel) {
+  async function copy(text, btn, doneLabel, resetLabel = "Copy prompt") {
     try {
       await navigator.clipboard.writeText(text);
     } catch {
@@ -168,7 +185,7 @@
     }
     btn.textContent = doneLabel;
     btn.classList.add("done");
-    setTimeout(() => { btn.textContent = "Copy prompt"; btn.classList.remove("done"); }, 1800);
+    setTimeout(() => { btn.textContent = resetLabel; btn.classList.remove("done"); }, 2200);
   }
 
   document.querySelectorAll(".tab").forEach((t) => {
