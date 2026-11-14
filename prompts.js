@@ -1,7 +1,7 @@
 // ------------------------------------------------------------------
 // PROMPT LIBRARY
 // Add, edit, or remove prompts here. Each prompt needs:
-//   sector:   "education", "healthcare", "accounting" or "m365"
+//   sector:   "education", "healthcare", "accounting", "m365" or "life"
 //   category: a short label used for the filter chips
 //   title:    the card heading
 //   use:      one line on when to use it
@@ -485,5 +485,135 @@ Explain any formulas you add so I can check them.`
 - A final slide with the decision or next step we need
 
 Keep all figures exactly as they appear in the source.`
+  },
+
+  // ---------------- EVERYDAY LIFE ----------------
+  {
+    sector: "life",
+    category: "Homework help",
+    title: "Step-by-step tutor (no answers)",
+    use: "Work through a problem yourself with hints, not answers.",
+    prompt: `Act as a patient tutor for a [GRADE LEVEL] student. I'm stuck on this problem:
+
+[PASTE PROBLEM]
+
+Do not give me the answer. Instead:
+1. Ask me one guiding question at a time and wait for my reply
+2. If I get a step wrong, give a hint about where to look, not the correction
+3. When I reach the answer, ask me to explain why it works in my own words
+
+Start by asking what I already know about this kind of problem.`
+  },
+  {
+    sector: "life",
+    category: "Homework help",
+    title: "Check my work",
+    use: "Find your own mistakes without being handed the answer.",
+    prompt: `Here is a [SUBJECT] problem, my answer, and the steps I took:
+
+Problem: [PROBLEM]
+My steps and answer:
+[PASTE YOUR WORK]
+
+Tell me whether my answer is right. If it isn't, point to the first step where something went wrong and explain what kind of mistake it is (e.g. sign error, misread the question), but let me fix it myself. Then give me one similar practice problem to try.`
+  },
+  {
+    sector: "life",
+    category: "Homework help",
+    title: "Study plan before a test",
+    use: "Turn a test date and topic list into a daily plan.",
+    prompt: `I have a [SUBJECT] test in [DAYS UNTIL TEST] days. It covers:
+
+[TOPICS ON THE TEST]
+
+I can study about [TIME PER DAY, e.g. 45 minutes] a day. My weakest areas are [WEAK TOPICS].
+
+Make a day-by-day study plan that:
+- Spends more time on my weak areas
+- Uses active recall and practice problems, not just rereading
+- Revisits earlier topics briefly (spaced review)
+- Keeps the day before the test light
+
+End with a 10-question practice quiz covering everything, with answers at the bottom.`
+  },
+  {
+    sector: "life",
+    category: "Homework help",
+    title: "Help me help my kid",
+    use: "For parents: understand how a topic is taught today.",
+    prompt: `My child is in [GRADE LEVEL] and is learning [TOPIC, e.g. long division with the area model]. I learned it differently and don't want to confuse them.
+
+Explain:
+1. How this method works, with one worked example
+2. Why schools teach it this way
+3. Three questions I can ask to help without giving the answer
+4. Common mistakes kids make with it, and how to spot them
+
+Keep it short and practical. I'm helping at the kitchen table, not teaching a class.`
+  },
+  {
+    sector: "life",
+    category: "Home & money",
+    title: "Weekly meal plan and grocery list",
+    use: "Plan a week of meals on a budget.",
+    prompt: `Create a 7-day dinner plan for [NUMBER OF PEOPLE] people with a grocery budget of about [WEEKLY BUDGET].
+
+Needs: [DIETARY NEEDS, e.g. one vegetarian, no nuts]
+Time: most dinners under [COOKING TIME, e.g. 30 minutes]
+Already have: [INGREDIENTS ON HAND]
+
+Reuse ingredients across meals to cut waste, include one leftovers night, and finish with a grocery list grouped by store section with estimated costs. Note that prices are estimates and vary by store.`
+  },
+  {
+    sector: "life",
+    category: "Home & money",
+    title: "Monthly budget starter",
+    use: "Organize your spending and find room to save.",
+    prompt: `Help me build a simple monthly budget. Rough numbers only; I won't share account details.
+
+Monthly take-home income: [MONTHLY INCOME]
+Regular expenses:
+[LIST EXPENSES AND AMOUNTS, e.g. rent 1200, car 300, phone 60]
+
+Please:
+1. Sort my expenses into needs, wants, and savings, and show the percentages
+2. Compare that with the 50/30/20 guideline and explain it in plain terms
+3. Suggest 3 realistic places to trim, with the monthly savings for each
+4. Help me set one savings goal: [SAVINGS GOAL, e.g. a 1,000 emergency fund]
+
+This is general budgeting help, not financial advice.`
+  },
+  {
+    sector: "life",
+    category: "Life admin",
+    title: "Explain a confusing letter or bill",
+    use: "Understand official mail and what you need to do.",
+    prompt: `I received this [TYPE OF DOCUMENT, e.g. medical bill / letter from my landlord / insurance notice] and I don't understand it. I've removed my name, address and account numbers.
+
+[PASTE THE TEXT]
+
+Explain in plain language:
+1. What this is and why I got it
+2. What, if anything, I need to do, and by when
+3. Any terms I might not know
+4. Questions I should ask, and who to call
+
+If anything looks unusual or possibly a scam, point it out. If it's a legal or medical matter, tell me what kind of professional could help.`
+  },
+  {
+    sector: "life",
+    category: "Career",
+    title: "Resume bullet makeover",
+    use: "Turn plain job duties into strong, results-focused bullets.",
+    prompt: `Rewrite these resume bullets for a [TARGET ROLE] position:
+
+[PASTE CURRENT BULLETS]
+
+For each bullet:
+- Start with a strong action verb
+- Show impact or results; if a number would help, ask me for it instead of making one up
+- Keep it to one line where possible
+
+Then suggest 2 skills or keywords from typical [TARGET ROLE] job postings that my bullets don't show yet, and ask me whether I have experience with them.`
   }
 ];

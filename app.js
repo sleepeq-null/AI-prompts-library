@@ -13,7 +13,8 @@
     education: "Education",
     healthcare: "Healthcare",
     accounting: "Accounting",
-    m365: "Microsoft 365"
+    m365: "Microsoft 365",
+    life: "Everyday life"
   };
   const PLACEHOLDER = /\[[^\]]+\]/g;
 
