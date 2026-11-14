@@ -3,12 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Content Security Policy: only this site's own scripts may run; styles and fonts are
+       limited to this site and Google Fonts; no plugins, framing targets or form posts.
+       GitHub Pages can't send custom headers, so the policy is set with a meta tag. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>AI Prompt Library</title>
   <meta name="description" content="Ready-to-use AI prompts for educators, healthcare teams, accountants, Microsoft 365 Copilot users, students and families, with an interactive prompt builder.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
   <header class="hero">
@@ -90,7 +95,7 @@
     </article>
   </template>
 
-  <script src="prompts.js?v=6"></script>
-  <script src="app.js?v=6"></script>
+  <script src="prompts.js?v=7"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>

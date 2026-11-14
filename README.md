@@ -1,6 +1,7 @@
 # AI Prompt Library for Work, School & Everyday Life
 
 [![Validate prompts](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/validate.yml/badge.svg)](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/validate.yml)
+[![CodeQL](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/codeql.yml/badge.svg)](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/codeql.yml)
 [![Deploy](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/pages/pages-build-deployment)
 ![Prompts](https://img.shields.io/badge/prompts-40-2f5d50)
 [![Suggest a prompt](https://img.shields.io/badge/suggest-a%20prompt-7cc4ad)](https://github.com/sleepeq-null/AI-prompts-library/issues/new?template=suggest-prompt.yml)
@@ -56,7 +57,7 @@ Adding a new prompt with new placeholders needs no code changes: the form genera
 - **Static site over a framework.** The content is small and changes rarely, so plain HTML, CSS and JavaScript keeps the site fast, dependency-free and free to host on GitHub Pages.
 - **Prompts in a `.js` file, not `.json`.** A `<script>` tag loads it, so the page also works opened straight from disk, where browsers block `fetch()` of local files.
 - **Safe rendering.** Prompt text and user input are HTML-escaped before being highlighted in the preview, so pasted content can't inject markup.
-- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=6`) that changes with each release.
+- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=7`) that changes with each release.
 - **Homework prompts that teach, not cheat.** The homework prompts tell the AI to ask guiding questions, give hints, and point to where a mistake is rather than handing over answers. Students get help learning, which is also what teachers and parents want.
 - **Lightweight media.** The 12-second header video is the 720p version (3.6 MB), muted, looping and inline, under a gradient that keeps the text readable.
 
@@ -86,7 +87,7 @@ Use [BRACKETS] for anything the reader fills in, e.g. [TOPIC, e.g. fractions].`
 },
 ```
 
-Then change `?v=6` to the next number in `index.html` so returning visitors get the update.
+Then change `?v=7` to the next number in `index.html` so returning visitors get the update.
 
 ## Automated checks
 
@@ -99,6 +100,21 @@ Every push and pull request runs **[Validate prompts](.github/workflows/validate
 - mismatched `?v=` cache-busting versions
 
 It also warns about prompts with no placeholders, and bracketed markers like `[ASSUMPTION]` that should be in parentheses.
+
+## Security
+
+The project follows secure software development practices, with security checks built into every stage:
+
+| Stage | Control |
+|---|---|
+| **Write** | Secret scanning with push protection blocks commits containing credentials |
+| **Review** | CODEOWNERS routes every change, especially CI/CD and scripts, to the maintainer |
+| **Build** | CodeQL static analysis (`security-extended`) on the JavaScript and the Actions workflows, plus the prompt validator's personal-data screen |
+| **Supply chain** | Every GitHub Action is pinned to a full commit SHA and kept current by Dependabot; Dependabot alerts and security updates are on |
+| **Pipeline** | Least-privilege workflow permissions, no stored checkout credentials, and `main` protected by required status checks |
+| **Run** | A strict Content Security Policy (self-hosted scripts only, no inline code), HTML-escaping of all prompt text and user input, and no backend, cookies or tracking |
+
+Found a vulnerability? Please report it privately. See [SECURITY.md](SECURITY.md).
 
 ## Contributing
 
