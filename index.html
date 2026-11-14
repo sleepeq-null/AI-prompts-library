@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Prompt Library</title>
+  <meta name="description" content="Ready-to-use AI prompt examples for educators and healthcare professionals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Prompt library</p>
+      <h1>Practical AI prompts for educators and healthcare teams</h1>
+      <p class="lede">Copy a prompt, replace the <span class="ph">[BRACKETED]</span> parts with your details, and paste it into the AI assistant you use.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="controls">
+      <div class="tabs" role="tablist" aria-label="Audience">
+        <button class="tab active" data-sector="all" role="tab" aria-selected="true">All</button>
+        <button class="tab" data-sector="education" role="tab" aria-selected="false">Education</button>
+        <button class="tab" data-sector="healthcare" role="tab" aria-selected="false">Healthcare</button>
+      </div>
+      <input id="search" type="search" placeholder="Search prompts…" aria-label="Search prompts">
+    </div>
+    <div class="chips" id="chips" aria-label="Categories"></div>
+
+    <aside class="notice" id="privacy">
+      <strong>Before you paste anything:</strong> never include personal or identifying information about students or patients (names, dates of birth, record numbers, etc.) unless your organization has approved the tool for that data. Always review AI output for accuracy; it's a first draft, not a final answer.
+    </aside>
+
+    <p class="count" id="count" aria-live="polite"></p>
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <footer class="wrap footer">
+    <h2>Tips for better results</h2>
+    <ul>
+      <li><strong>Give it a role and context.</strong> "You are a 7th-grade science teacher…" gets better output than a bare question.</li>
+      <li><strong>Be specific about the format.</strong> Ask for bullets, a table, a word limit, or a reading level.</li>
+      <li><strong>Iterate.</strong> Follow up with "make it shorter", "simpler", or "add an example".</li>
+      <li><strong>You're the expert.</strong> Check facts, especially anything clinical or graded.</li>
+    </ul>
+  </footer>
+
+  <template id="card-tpl">
+    <article class="card">
+      <div class="card-top">
+        <span class="badge"></span>
+        <span class="cat"></span>
+      </div>
+      <h3></h3>
+      <p class="use"></p>
+      <details>
+        <summary>View prompt</summary>
+        <pre></pre>
+      </details>
+      <button class="copy" type="button">Copy prompt</button>
+    </article>
+  </template>
+
+  <script src="prompts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
