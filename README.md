@@ -1,6 +1,13 @@
 # AI Prompt Library for Work, School & Everyday Life
 
+[![Validate prompts](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/validate.yml/badge.svg)](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/validate.yml)
+[![Deploy](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/sleepeq-null/AI-prompts-library/actions/workflows/pages/pages-build-deployment)
+![Prompts](https://img.shields.io/badge/prompts-40-2f5d50)
+[![Suggest a prompt](https://img.shields.io/badge/suggest-a%20prompt-7cc4ad)](https://github.com/sleepeq-null/AI-prompts-library/issues/new?template=suggest-prompt.yml)
+
 **Live site: [sleepeq-null.github.io/AI-prompts-library](https://sleepeq-null.github.io/AI-prompts-library/)**
+
+> 💡 **Have a prompt that works well?** [Suggest it here](https://github.com/sleepeq-null/AI-prompts-library/issues/new?template=suggest-prompt.yml). No coding needed. Questions or ideas? Join the [Discussions](https://github.com/sleepeq-null/AI-prompts-library/discussions).
 
 A searchable library of 40 ready-to-use AI prompts for **educators, healthcare teams, accountants, Microsoft 365 Copilot users, students and families**, with an interactive builder that turns a prompt template into a finished prompt you can copy and paste into any AI assistant.
 
@@ -49,7 +56,7 @@ Adding a new prompt with new placeholders needs no code changes: the form genera
 - **Static site over a framework.** The content is small and changes rarely, so plain HTML, CSS and JavaScript keeps the site fast, dependency-free and free to host on GitHub Pages.
 - **Prompts in a `.js` file, not `.json`.** A `<script>` tag loads it, so the page also works opened straight from disk, where browsers block `fetch()` of local files.
 - **Safe rendering.** Prompt text and user input are HTML-escaped before being highlighted in the preview, so pasted content can't inject markup.
-- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=5`) that changes with each release.
+- **Cache-busting.** GitHub Pages lets browsers cache files for about 10 minutes, which once caused new HTML to load with an old stylesheet. Asset links carry a version query (`styles.css?v=6`) that changes with each release.
 - **Homework prompts that teach, not cheat.** The homework prompts tell the AI to ask guiding questions, give hints, and point to where a mistake is rather than handing over answers. Students get help learning, which is also what teachers and parents want.
 - **Lightweight media.** The 12-second header video is the 720p version (3.6 MB), muted, looping and inline, under a gradient that keeps the text readable.
 
@@ -79,11 +86,31 @@ Use [BRACKETS] for anything the reader fills in, e.g. [TOPIC, e.g. fractions].`
 },
 ```
 
-Then change `?v=5` to the next number in `index.html` so returning visitors get the update.
+Then change `?v=6` to the next number in `index.html` so returning visitors get the update.
+
+## Automated checks
+
+Every push and pull request runs **[Validate prompts](.github/workflows/validate.yml)** on GitHub Actions. The script ([`scripts/validate-prompts.mjs`](scripts/validate-prompts.mjs)) loads `prompts.js` the same way the browser does and fails the build if it finds:
+
+- missing or empty fields, or duplicate titles
+- unbalanced, nested or empty `[brackets]` that would break the builder
+- a sector with no matching tab in `index.html`
+- text that looks like real personal data (emails, SSN-style or card-length numbers)
+- mismatched `?v=` cache-busting versions
+
+It also warns about prompts with no placeholders, and bracketed markers like `[ASSUMPTION]` that should be in parentheses.
+
+## Contributing
+
+Suggestions are welcome. You can [suggest a prompt](https://github.com/sleepeq-null/AI-prompts-library/issues/new?template=suggest-prompt.yml) through a guided form, [report a problem](https://github.com/sleepeq-null/AI-prompts-library/issues/new?template=report-problem.yml), or open a pull request. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder with any static server.
+Open `index.html` in a browser, or serve the folder with any static server. To run the checks:
+
+```bash
+node scripts/validate-prompts.mjs
+```
 
 ## Credits
 

@@ -1,0 +1,30 @@
+name: 🐞 Report a problem
+description: Something on the site isn't working, or a prompt gives poor results.
+title: "[Problem]: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem?
+      options:
+        - The site isn't working or looks wrong
+        - A prompt gives poor or inaccurate results
+        - A typo or unclear wording
+        - Accessibility issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the prompt title if it's about a specific prompt. Please don't paste real personal information.
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Browser and device (if it's a site issue)
+      placeholder: e.g. Chrome on Windows, Safari on iPhone

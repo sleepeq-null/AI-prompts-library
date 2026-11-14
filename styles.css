@@ -176,6 +176,22 @@ pre mark.filled {
 .footer h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 24px; }
 .footer li { margin-bottom: 6px; color: var(--muted); }
 .footer strong { color: var(--text); }
+.contribute {
+  margin-top: 32px; padding: 24px; border-radius: 14px;
+  background: var(--accent-soft); border: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between;
+}
+.contribute h2 { margin: 0 0 4px; font-size: 22px; }
+.contribute p { margin: 0; color: var(--muted); max-width: 46ch; }
+.contribute-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn {
+  display: inline-block; font-weight: 500; font-size: 14px; text-decoration: none;
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent);
+  background: var(--surface);
+}
+.btn:hover { background: var(--accent); color: var(--surface); }
+.btn.primary { background: var(--accent); color: var(--surface); }
+.btn.primary:hover { filter: brightness(1.1); }
 
 @media (max-width: 600px) {
   .hero { padding: 56px 0 44px; }

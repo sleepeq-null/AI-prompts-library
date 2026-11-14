@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🌐 Open the prompt library
+    url: https://sleepeq-null.github.io/AI-prompts-library/
+    about: Browse and customize all the prompts on the live site.
+  - name: 💬 Ask a question or share ideas
+    url: https://github.com/sleepeq-null/AI-prompts-library/discussions
+    about: Chat about prompt-writing, ideas for new areas, or how you use the library.

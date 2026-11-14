@@ -1,0 +1,66 @@
+name: 💡 Suggest a prompt
+description: Share a prompt that works well for you, and we may add it to the library.
+title: "[Prompt]: "
+labels: ["new prompt"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! Please **don't include any real names, student or patient details, or account numbers** in your example.
+        Use `[BRACKETS]` for the parts people should fill in, like `[GRADE LEVEL]` or `[TOPIC, e.g. fractions]`.
+
+  - type: dropdown
+    id: sector
+    attributes:
+      label: Area
+      options:
+        - Education
+        - Healthcare
+        - Accounting
+        - Microsoft 365
+        - Everyday life
+        - Something new (explain below)
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Prompt title
+      placeholder: e.g. Build a lesson plan
+    validations:
+      required: true
+
+  - type: input
+    id: use
+    attributes:
+      label: When would someone use it?
+      description: One line, shown under the title on the card.
+      placeholder: e.g. Draft a full lesson in minutes, then adapt it to your class.
+    validations:
+      required: true
+
+  - type: textarea
+    id: prompt
+    attributes:
+      label: The prompt
+      description: The full text people will copy.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it work well? (optional)
+      description: Anything you learned while refining it helps others write better prompts.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: My prompt contains no real personal, student, patient or client information.
+          required: true
+        - label: I've tried this prompt with an AI assistant and it gave useful results.
+          required: false
